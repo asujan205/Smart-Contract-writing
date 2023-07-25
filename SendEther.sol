@@ -48,6 +48,8 @@ receive() exists?  fallback()
 
 
 contract SendEther {
+
+    
     
         function sendViaTransfer(address payable _to) public payable {
             // This function is no longer recommended for sending Ether.
@@ -67,4 +69,6 @@ contract SendEther {
             (bool sent, bytes memory data) = _to.call{value: msg.value}("");
             require(sent, "Failed to send Ether");
         }
+
+
 }
