@@ -21,7 +21,13 @@ contract Payable {
 function getBalance() public view returns(uint) {
         return address(this).balance;
     }
-    
+
+    function Deposit() public payable {
+    }
+
+    function Recieve() public payable {
+    }
+
 
 
 
