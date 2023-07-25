@@ -13,21 +13,24 @@ contract Payable {
     }
 
 
-    function sendEther() public payable {
-        owner.transfer(msg.value);
-    }
+  
 
 
 function getBalance() public view returns(uint) {
         return address(this).balance;
     }
 
-    function Deposit() public payable {
+    
+    function recieve() public payable {
     }
 
-    function Recieve() public payable {
-    }
 
+function withdrawl (uint amount) external {
+        payable(msg.sender).transfer(amount);
+        (bool sent ,) = payable(msg.sender).call{value: amount}("");
+        require(sent, "Failed to send Ether");
+
+    }
 
 
 
