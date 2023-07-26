@@ -80,5 +80,51 @@ contract CounterV2 {
 
 
 contract UpgradeAbleProxy {
+    address public implementation;
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+fallback() external payable {
+
+    _delegateCall(implementation);
+
+}
+
+function _delegateCall (address _implementation) private {
+
+    assembly {
+        calldatacopy(0x0, 0x0, calldatasize())
+        let result := delegatecall(gas(), _implementation, 0x0, calldatasize(), 0x0, 0)
+        returndatacopy(0x0, 0x0, returndatasize())
+        switch result
+        case 0 {revert(0, returndatasize())}
+        default {return (0, returndatasize())}
+    }
+
+    
+    
+   
+    
+}
+
+
+
+receive() external payable {
+
+    _delegateCall(implementation);
+
+
+}
+function UpgradeTo (address _implementation) public {
+    require(msg.sender == owner);
+    implementation = _implementation;
+}
+
+
+
+
 
 }
