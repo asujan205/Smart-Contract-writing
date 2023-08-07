@@ -11,7 +11,7 @@ contract Storage {
     uint128 a = 1;     // 16 bytes
     uint128 b = 2;     // 16 bytes
 
-    function storeYulVal(uint256 slot, uint256 newValue) external {
+    function storeVal(uint256 slot, uint256 newValue) external {
         assembly {            
             sstore(slot, newValue)
         }
@@ -23,13 +23,13 @@ contract Storage {
         }
     }
 
-    function loadYulSlotInBytes(uint256 slot) external view returns(bytes32 ret) {
+    function loadSlotInBytes(uint256 slot) external view returns(bytes32 ret) {
         assembly {
             ret := sload(slot)
         }
     }
 
-    function loadYul(uint256 slot) external view returns(uint256 ret) {
+    function load(uint256 slot) external view returns(uint256 ret) {
         assembly {
             ret := sload(slot)
         }
