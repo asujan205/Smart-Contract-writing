@@ -35,8 +35,17 @@ contract YullTypes{
 
         return _rep;
     }
+// DIRECT assignment to the string doestnt work
+  function getString() external pure returns( string memory) {
+        bytes32  rep;
 
+        assembly {
+            rep := "Hello World"
+        }
 
+        return string(abi.encode(rep));
+  }
+    
 
 
 }
